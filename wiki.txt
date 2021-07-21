@@ -1,0 +1,36 @@
+-- Syntax
+[]   - arrays/lists
+"hi" - strings
+1234 - int
+12.3 - float
+
+-- Program basics
+[] - Empty program
+[
+    ["print", "hello"],
+    ["print", "world"]
+]
+
+^ This program contains two lines - prints, that will print:
+hello
+world
+I hope you got the basics.
+
+-- String operations
+To access variable - "^&variableName"
+Special chars -
+  \n - newline
+  \t - tab
+  \pow - ^
+  \bs - backslash
+
+-- All commands
+"print", String - prints string
+"var", String, Objects - creates/modifies variable
+"if", Array(condition), Array(commands) - if block
+condition - Only object, string (with comprassion sign), object now supported
+"while", Array(condition), Array(commands) - while loop
+"try", Array(try commands), Array(catch commands) - try/catch block
+"math", String, ^&var, amount - math - only add supported for now
+"fn", String, Array(commands) - function
+"fncall", String - call function

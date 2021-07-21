@@ -9,7 +9,7 @@ A: python jpl.py yourApp.json
 #
 Q: Where I can found wiki/examples?
 
-A: Wiki: wiki.md
+A: Wiki: wiki.txt
 
    Examples: examples/
 
