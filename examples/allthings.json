@@ -1,0 +1,37 @@
+[
+    ["var", "message", "Hello World!"],
+    ["var", "cois", "Counter value is"],
+    ["var", "counter", 0],
+    ["print","^&message\\nIf:"],
+    [
+        "if", [6, "==", 6], 
+        [
+            ["math", "add", "^&counter", 1], 
+            ["print", "^&cois ^&counter"]
+        ]
+    ],
+    ["print", "While:"],
+    [
+        "while", ["^&counter", "!=", 11],
+        [
+            ["print", "^&cois ^&counter"],
+            ["math", "add", "^&counter", 1]
+        ]
+    ],
+    [
+        "try",
+        [
+            ["penis"]
+        ],
+        [
+            ["print", "error"]
+        ]
+    ],
+    ["print", "ok"],
+    ["fn", "sayGay",
+        [
+            ["print", "you gay"]
+        ]
+    ],
+    ["fncall", "sayGay"]
+]

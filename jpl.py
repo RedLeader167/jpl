@@ -2,6 +2,9 @@ import json
 import sys
 import operator
 
+if len(sys.argv) < 2:
+    print("Usage: python jpl.py <inputfile>")
+    sys.exit()
 
 operators = {
   "==": operator.eq,
@@ -12,46 +15,7 @@ operators = {
   "<=": operator.le
 }
 
-code = """
-[
-    ["var", "message", "Hello World!"],
-    ["var", "cois", "Counter value is"],
-    ["var", "counter", 0],
-    ["print","^&message\\nIf:"],
-    [
-        "if", [6, "==", 6], 
-        [
-            ["math", "add", "^&counter", 1], 
-            ["print", "^&cois ^&counter"]
-        ]
-    ],
-    ["print", "While:"],
-    [
-        "while", ["^&counter", "!=", 11],
-        [
-            ["print", "^&cois ^&counter"],
-            ["math", "add", "^&counter", 1]
-        ]
-    ],
-    [
-        "try",
-        [
-            ["print"]
-        ],
-        [
-            ["print", "error"]
-        ]
-    ],
-    ["print", "ok"],
-    ["fn", "sayGay",
-        [
-            ["print", "you gay"]
-        ]
-    ],
-    ["fncall", "sayGay"]
-]
-"""
-
+code = open(sys.argv[1]).read()
 fc = json.loads(code)
 
 #print(fc)
