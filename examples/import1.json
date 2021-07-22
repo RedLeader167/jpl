@@ -1,0 +1,5 @@
+[
+	["pkg", "lib", "my", []],
+	["print", "^&g"],
+	["jpkg", "myl.json"]
+]

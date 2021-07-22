@@ -23,6 +23,20 @@ varTable = {}
 fnTable = {}
 codePtr = 0
 
+def callf(libname, funname, args):
+    global varTable
+    global fnTable
+    global codePtr
+    exec("import " + libname)
+    varTable, fnTable, codePtr = eval(libname + "." + funname + "(args, [varTable, fnTable, codePtr])")
+
+def jcall(libname, ise=False):
+    jsonv = json.loads(open(libname).read())
+    tmpc = 0
+    while tmpc < len(jsonv):
+        process(jsonv[tmpc], ise)
+        tmpc += 1
+
 def argck(args, index, ise=False):
     if True:
         global codePtr
@@ -84,6 +98,13 @@ def process(ca, ise=False):
         if ca[0] == "print":
             if not argck(ca, 1, ise): return False
             print(procArg(ca[1]))
+        elif ca[0] == "pkg":
+            if not argck(ca, 3, ise): return False
+            if not isArg(ca[3], list): return False
+            callf(ca[1], ca[2], ca[3])
+        elif ca[0] == "jpkg":
+            if not argck(ca, 1, ise): return False
+            jcall(ca[1], ise)
         elif ca[0] == "var":
             if not argck(ca, 2, ise): return False
             varTable["^&" + str(ca[1])] = ca[2]
