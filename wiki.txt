@@ -34,3 +34,5 @@ condition - Only object, string (with comprassion sign), object now supported
 "math", String, ^&var, amount - math - only add supported for now
 "fn", String, Array(commands) - function
 "fncall", String - call function
+"pkg", String(libname), String(function), Array(args) - call function from python library libname with args
+"jpkg", String(filename) - import json file
