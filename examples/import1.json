@@ -1,5 +1,5 @@
 [
-	["pkg", "lib", "my", []],
+	["pkg", "import3", "my", []],
 	["print", "^&g"],
-	["jpkg", "myl.json"]
+	["jpkg", "import2.json"]
 ]

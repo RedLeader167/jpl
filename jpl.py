@@ -23,19 +23,31 @@ varTable = {}
 fnTable = {}
 codePtr = 0
 
-def callf(libname, funname, args):
+def callf(libname, funname, args, ise=False):
     global varTable
     global fnTable
     global codePtr
-    exec("import " + libname)
-    varTable, fnTable, codePtr = eval(libname + "." + funname + "(args, [varTable, fnTable, codePtr])")
+    try:
+        exec("import " + libname)
+        varTable, fnTable, codePtr = eval(libname + "." + funname + "(args, [varTable, fnTable, codePtr])")
+    except:
+        if not ise:
+            print(f"Error at line {str(codePtr)}: file not found")
+        return False
+    return True
 
 def jcall(libname, ise=False):
-    jsonv = json.loads(open(libname).read())
+    try:
+        jsonv = json.loads(open(libname).read())
+    except:
+        if not ise:
+            print(f"Error at line {str(codePtr)}: file not found")
+        return False
     tmpc = 0
     while tmpc < len(jsonv):
         process(jsonv[tmpc], ise)
         tmpc += 1
+    return True
 
 def argck(args, index, ise=False):
     if True:
@@ -101,10 +113,10 @@ def process(ca, ise=False):
         elif ca[0] == "pkg":
             if not argck(ca, 3, ise): return False
             if not isArg(ca[3], list): return False
-            callf(ca[1], ca[2], ca[3])
+            if not callf(ca[1], ca[2], ca[3], ise): return False
         elif ca[0] == "jpkg":
             if not argck(ca, 1, ise): return False
-            jcall(ca[1], ise)
+            if not jcall(ca[1], ise): return False
         elif ca[0] == "var":
             if not argck(ca, 2, ise): return False
             varTable["^&" + str(ca[1])] = ca[2]
@@ -113,6 +125,9 @@ def process(ca, ise=False):
             if ca[1] == "add":
                 if not argck(ca, 3, ise): return False
                 varTable[ca[2]] += ca[3]
+            else:
+                print(f"Error at line {str(codePtr)}: unknown math thing")
+                return False
         elif ca[0] == "if":
             if not argck(ca, 1, ise): return False
             if not isArg(ca[1], list, ise): return False
